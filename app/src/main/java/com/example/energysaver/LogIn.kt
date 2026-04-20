@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -30,38 +33,49 @@ class LogIn {
 @Composable
 fun LogInCompose(modifier: Modifier = Modifier) {
     Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFFE8F5E9)){
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
+        var username = remember { mutableStateOf("") }
+        var password = remember { mutableStateOf("") }
         Column(modifier = Modifier.padding(horizontal = 60.dp, vertical = 300.dp)) {
-            if (username.isNotEmpty()) {
+            if (username.value.isNotEmpty()) {
                 Text(
-                    text = "Hello, $username!",
+                    text = "Hello, ${username.value}!",
                     modifier = Modifier.padding(bottom = 8.dp),
                     style = MaterialTheme.typography.labelMedium
                 )
             }
             OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
+                value = username.value,
+                onValueChange = { username.value = it },
                 label = { Text("Username") }
             )
 
         }
         Column(modifier = Modifier.padding(horizontal = 60.dp, vertical = 360.dp)) {
-            if (password.isNotEmpty()) {
+            if (password.value.isNotEmpty()) {
                 Text(
-                    text = "Hello, $password!",
+                    text = "Hello, ${password.value}!",
                     modifier = Modifier.padding(bottom = 8.dp),
                     style = MaterialTheme.typography.labelMedium
                 )
             }
             OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
+                value = password.value,
+                onValueChange = { password.value = it },
                 label = { Text("Password") }
             )
 
         }
+        Spacer(modifier = Modifier.height(20.dp))
+        Button(
+            onClick = {},
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2E7D32)
+            ),
+            modifier = Modifier.padding(horizontal = 100.dp, vertical = 400.dp)
+        ) {
+            Text("Login")
+        }
+
     }
 }
 
