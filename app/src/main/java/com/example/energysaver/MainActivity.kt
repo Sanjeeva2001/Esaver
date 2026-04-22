@@ -16,12 +16,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.BarChart
+import androidx.compose.material.icons.rounded.Bolt
+import androidx.compose.material.icons.rounded.DensityMedium
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.Person
@@ -31,8 +34,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -72,7 +75,8 @@ private enum class AppPage(
     val icon: ImageVector
 ) {
     Home("Home", Icons.Rounded.Home),
-    Insights("Insights", Icons.Rounded.BarChart)
+    Insights("Insights", Icons.Rounded.BarChart),
+    Profile("Profile", Icons.Rounded.Person)
 }
 
 @Composable
@@ -81,23 +85,88 @@ private fun EnergySaverApp() {
 
     Scaffold(
         containerColor = Color(0xFFF2F8F3),
-        topBar = { AppHeader() },
-        bottomBar = {
-            NavigationBar(containerColor = Color.White) {
-                AppPage.entries.forEach { page ->
-                    NavigationBarItem(
-                        selected = currentPage == page,
-                        onClick = { currentPage = page },
-                        icon = { Icon(page.icon, contentDescription = page.title) },
-                        label = { Text(page.title) }
+        topBar = { AppHeader() }
+    ) { innerPadding ->
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFFF2F8F3))
+                .padding(innerPadding)
+        ) {
+            AppNavigationRail(
+                currentPage = currentPage,
+                onPageSelected = { currentPage = it }
+            )
+
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize()
+            ) {
+                when (currentPage) {
+                    AppPage.Home -> HomeDashboardScreen(PaddingValues(0.dp))
+                    AppPage.Insights -> InsightDashboardScreen(PaddingValues(0.dp))
+                    AppPage.Profile -> ProfileScreen(PaddingValues(0.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AppNavigationRail(
+    currentPage: AppPage,
+    onPageSelected: (AppPage) -> Unit
+) {
+    NavigationRail(
+        modifier = Modifier
+            .padding(start = 10.dp, top = 12.dp, bottom = 12.dp)
+            .width(92.dp),
+        containerColor = Color(0xFFEAF7EE),
+        header = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(18.dp),
+                modifier = Modifier.padding(top = 12.dp, bottom = 12.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .background(Color.Transparent),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.DensityMedium,
+                        contentDescription = "Open menu",
+                        tint = Color(0xFF3F6150)
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .size(54.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color(0xFFD6EFDD)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Bolt,
+                        contentDescription = "Electricity logo",
+                        tint = Color(0xFF1A6A46)
                     )
                 }
             }
         }
-    ) { innerPadding ->
-        when (currentPage) {
-            AppPage.Home -> HomeDashboardScreen(innerPadding)
-            AppPage.Insights -> InsightDashboardScreen(innerPadding)
+    ) {
+        AppPage.entries.forEach { page ->
+            NavigationRailItem(
+                selected = currentPage == page,
+                onClick = { onPageSelected(page) },
+                icon = { Icon(page.icon, contentDescription = page.title) },
+                label = { Text(page.title) },
+                alwaysShowLabel = true
+            )
         }
     }
 }
@@ -279,6 +348,46 @@ private fun InsightDashboardScreen(innerPadding: PaddingValues) {
 }
 
 @Composable
+private fun ProfileScreen(innerPadding: PaddingValues) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF2F8F3))
+            .padding(innerPadding),
+        contentPadding = PaddingValues(18.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item {
+            InsightHeaderCard(
+                title = "Profile and preferences",
+                description = "This page is reserved for the user form, household preferences, and the editable settings that will support personalisation later."
+            )
+        }
+
+        item {
+            SectionHeading("Form modules")
+        }
+
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                ModuleCard(
+                    title = "Household type dropdown",
+                    text = "Choose apartment, shared house, or family home to personalise energy guidance."
+                )
+                ModuleCard(
+                    title = "Energy goal settings",
+                    text = "Set weekly electricity and carbon targets for reminders and progress tracking."
+                )
+                ModuleCard(
+                    title = "Reminder preferences",
+                    text = "Configure when eco tips and scheduled alerts should appear."
+                )
+            }
+        }
+    }
+}
+
+@Composable
 private fun HeroSection(title: String, subtitle: String) {
     Card(
         shape = RoundedCornerShape(28.dp),
@@ -325,7 +434,10 @@ private fun HeroSection(title: String, subtitle: String) {
 }
 
 @Composable
-private fun InsightHeaderCard() {
+private fun InsightHeaderCard(
+    title: String = "Insights page",
+    description: String = "Instead of explaining the idea, this page behaves like a real product body: chart section, goals, reminders, and system modules."
+) {
     Card(
         shape = RoundedCornerShape(28.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -337,7 +449,7 @@ private fun InsightHeaderCard() {
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
-                text = "Insights page",
+                text = title,
                 style = MaterialTheme.typography.labelLarge,
                 color = Color(0xFF5A7663)
             )
@@ -348,7 +460,7 @@ private fun InsightHeaderCard() {
                 color = Color(0xFF183D2D)
             )
             Text(
-                text = "Instead of explaining the idea, this page behaves like a real product body: chart section, goals, reminders, and system modules.",
+                text = description,
                 color = Color(0xFF5A7663)
             )
         }
