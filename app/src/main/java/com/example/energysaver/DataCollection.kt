@@ -78,7 +78,7 @@ fun formComposable(){
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewScreens() {
+fun formPreview() {
     formComposable()
 
 }
