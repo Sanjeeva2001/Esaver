@@ -49,54 +49,64 @@ fun LogInCompose(modifier: Modifier = Modifier) {
         var email = remember { mutableStateOf("") }
         var password = remember { mutableStateOf("") }
 
-        Column(modifier = Modifier.padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
-            if (email.value.isNotEmpty()) {
-                Text(
-                    text = "Hello, ${email.value}!",
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    style = MaterialTheme.typography.labelMedium
+        Box(modifier = Modifier.fillMaxSize().padding(24.dp)){
+
+            Column(modifier = Modifier.align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center) {
+                if (email.value.isNotEmpty()) {
+                    Text(
+                        text = "Hello, ${email.value}!",
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+                OutlinedTextField(
+                    value = email.value,
+                    onValueChange = { email.value = it },
+                    label = { Text("Email") },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White
+                    )
                 )
+                Spacer(modifier = Modifier.height(20.dp))
+                OutlinedTextField(
+                    value = password.value,
+                    onValueChange = { password.value = it },
+                    label = { Text("Password") },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White
+                    )
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                ElevatedButton(
+                    onClick = {},
+                    modifier = Modifier.fillMaxWidth().height(55.dp),
+                    colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF1B5E20),
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text(text = "Login",
+                        fontSize = 22.sp)
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = "Forgot password?")
+                }
+
+
             }
-            OutlinedTextField(
-                value = email.value,
-                onValueChange = { email.value = it },
-                label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White
-                )
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            OutlinedTextField(
-                value = password.value,
-                onValueChange = { password.value = it },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth(),
-                colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White
-                )
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            ElevatedButton(
-                onClick = {},
-                modifier = Modifier.fillMaxWidth().height(55.dp),
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF1B5E20),
-                    contentColor = Color.White
-                )
-            ) {
-                Text(text = "Login",
-                    fontSize = 22.sp)
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = "Not registered yet? Sign up.")
-            }
+            Text(text = "Not registered yet? Sign up",
+                modifier = Modifier.align(Alignment.BottomCenter),
+                fontSize = 22.sp)
         }
+
+
     }
 }
 
