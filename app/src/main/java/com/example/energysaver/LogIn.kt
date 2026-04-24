@@ -37,7 +37,7 @@ class LogIn {
 }
 
 @Composable
-fun LogInCompose(modifier: Modifier = Modifier) {
+fun LogInCompose(onLoginClick: () -> Unit) {
 
     val context = LocalContext.current
 
@@ -113,5 +113,5 @@ fun LogInCompose(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-    LogInCompose()
+
 }

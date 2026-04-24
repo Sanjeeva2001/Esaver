@@ -128,7 +128,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EnergySaverTheme {
-                EnergySaverApp()
+                var isLogIn by remember { mutableStateOf(false) }
+                if (isLogIn){
+                    LogInCompose(onLoginClick = {isLogIn == true})
+                }
             }
         }
     }
