@@ -37,7 +37,9 @@ class LogIn {
 }
 
 @Composable
-fun LogInCompose(onLoginClick: () -> Unit) {
+fun LogInCompose(onLoginClick: () -> Unit,
+                 onForgotPasswordClick: () -> Unit,
+                 onSignUpClick: () -> Unit) {
 
     val context = LocalContext.current
 
@@ -96,14 +98,19 @@ fun LogInCompose(onLoginClick: () -> Unit) {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Forgot password?")
+                    TextButton(onClick = onForgotPasswordClick) {
+                        Text("Forgot password?")
+                    }
                 }
 
 
             }
-            Text(text = "Not registered yet? Sign up",
-                modifier = Modifier.align(Alignment.BottomCenter),
-                fontSize = 22.sp)
+            TextButton(
+                onClick = onSignUpClick,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            ) {
+                Text("Not registered yet? Sign up", fontSize = 18.sp)
+            }
         }
 
 
@@ -113,5 +120,5 @@ fun LogInCompose(onLoginClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-    LogInCompose {  }
+
 }

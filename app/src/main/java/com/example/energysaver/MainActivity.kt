@@ -109,12 +109,6 @@ private enum class AppPage(
     Profile("Profile", "Create your account", Icons.Rounded.Person)
 }
 
-enum class StartScreen{
-    LOGIN,
-    FP,
-    SIGNUP,
-    HOME
-}
 private data class ActivityEntry(
     val title: String,
     val subtitle: String,
@@ -133,16 +127,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            EnergySaverTheme {
-                var isLogIn by remember { mutableStateOf(false) }
-                if (!isLogIn){
-                    LogInCompose(onLoginClick = {isLogIn = true})
+            var screen by remember { mutableStateOf("login") }
 
+            when (screen) {
 
-                }else{
-                    EnergySaverApp()
-                }
+                "login" -> LogInCompose(
+                    onLoginClick = { screen = "first page" },
+                    onForgotPasswordClick = { screen = "forgot password" },
+                    onSignUpClick = { screen = "signup" }
+                )
+
+                "forgot password" -> ForgotPasswordComposable(
+                    onBack = { screen = "login" }
+                )
+
+                "signup" -> ProfileScreen()
+
+                "first page" -> EnergySaverApp()
             }
+//            
+
+
         }
     }
 }
