@@ -145,7 +145,7 @@ class MainActivity : ComponentActivity() {
 
                 "first page" -> EnergySaverApp()
             }
-//            
+//
 
 
         }
