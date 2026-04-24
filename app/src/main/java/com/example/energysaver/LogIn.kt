@@ -84,7 +84,7 @@ fun LogInCompose(onLoginClick: () -> Unit) {
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 ElevatedButton(
-                    onClick = {},
+                    onClick = onLoginClick,
                     modifier = Modifier.fillMaxWidth().height(55.dp),
                     colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF1B5E20),
@@ -113,5 +113,5 @@ fun LogInCompose(onLoginClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-
+    LogInCompose {  }
 }

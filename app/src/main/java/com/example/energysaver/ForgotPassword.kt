@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ForgotPasswordComposable() {
+fun ForgotPasswordComposable(onBack: () -> Unit) {
 
     val Green = Color(0xFF1B5E20)
 
@@ -95,6 +95,6 @@ fun ForgotPasswordComposable() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewScreens() {
-    ForgotPasswordComposable()
+
 
 }

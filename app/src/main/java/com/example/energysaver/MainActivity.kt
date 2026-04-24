@@ -109,6 +109,12 @@ private enum class AppPage(
     Profile("Profile", "Create your account", Icons.Rounded.Person)
 }
 
+enum class StartScreen{
+    LOGIN,
+    FP,
+    SIGNUP,
+    HOME
+}
 private data class ActivityEntry(
     val title: String,
     val subtitle: String,
@@ -129,8 +135,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             EnergySaverTheme {
                 var isLogIn by remember { mutableStateOf(false) }
-                if (isLogIn){
-                    LogInCompose(onLoginClick = {isLogIn == true})
+                if (!isLogIn){
+                    LogInCompose(onLoginClick = {isLogIn = true})
+
+
+                }else{
+                    EnergySaverApp()
                 }
             }
         }
