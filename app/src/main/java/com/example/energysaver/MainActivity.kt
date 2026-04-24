@@ -716,6 +716,19 @@ private fun LogEnergyScreen() {
 
 @Composable
 private fun HistoryScreen() {
+    var search by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = search,
+        onValueChange = { search = it },
+        shape = RoundedCornerShape(12.dp),
+        placeholder = { Text("Search...") },
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp,
+            vertical = 8.dp),
+        colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White,
+            unfocusedContainerColor = Color.White,
+            disabledContainerColor = Color.White)
+    )
     val entries = remember {
         listOf(
             ActivityEntry("Air Conditioner", "Appliances · Apr 16 10:30", "2.1 kWh", "1.66 kg CO₂"),
