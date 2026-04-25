@@ -31,6 +31,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,6 +59,8 @@ data class EnergyEntry(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryScreen() {
+    var search by remember { mutableStateOf("") }
+
     val entries = listOf(
         EnergyEntry(1, "Air Conditioner", "Appliances", "Apr 16 10:30", "2.1 kWh", "1.66 kg CO₂", "Residential", "0.79 kg/kWh (Aus grid)"),
         EnergyEntry(2, "Washing Machine", "Appliances", "Apr 16 08:00", "1.4 kWh", "1.11 kg CO₂", "Residential", "0.79 kg/kWh (Aus grid)"),
@@ -83,6 +87,18 @@ fun HistoryScreen() {
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
+        OutlinedTextField(
+            value = search,
+            onValueChange = { search = it },
+            shape = RoundedCornerShape(12.dp),
+            placeholder = { Text("Search...") },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp,
+                vertical = 8.dp),
+            colors = OutlinedTextFieldDefaults.colors(focusedTextColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White)
+        )
+
         Text(
             text = "Energy History",
             style = MaterialTheme.typography.headlineSmall,
