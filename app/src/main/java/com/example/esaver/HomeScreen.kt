@@ -33,14 +33,9 @@ fun HomeScreen() {
         ) {
             Column {
                 Text(
-                    "Good morning 🌱",
+                    "Hi Welcome 🌱",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
-                )
-                Text(
-                    "Wednesday, 16 April 2026",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
                 )
             }
         }
@@ -114,9 +109,9 @@ fun HomeScreen() {
 
         // Activity list
         val activities = listOf(
-            Triple("Air Conditioner — 2.1 kWh", "Today, 10:30 AM", "0.8 kg CO₂"),
-            Triple("Washing Machine — 1.4 kWh", "Today, 8:00 AM", "0.5 kg CO₂"),
-            Triple("EV Charging — 12 kWh", "Yesterday, 11 PM", "4.6 kg CO₂")
+            Triple("Air Conditioner", "Today, 10:30 AM", "0.8 kg CO₂"),
+            Triple("Washing Machine", "Today, 8:00 AM", "0.5 kg CO₂"),
+            Triple("EV Charging", "Yesterday, 11 PM", "4.6 kg CO₂")
         )
 
         activities.forEach { (name, time, co2) ->
