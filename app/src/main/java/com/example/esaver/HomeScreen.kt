@@ -3,7 +3,6 @@ package com.example.esaver
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -29,29 +28,16 @@ fun HomeScreen() {
         // Greeting row
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
                 Text(
-                    "Good morning 🌱",
+                    "Hi Welcome 🌱",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
-                    "Wednesday, 16 April 2026",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
-                )
             }
-            Icon(
-                Icons.Default.Person,
-                contentDescription = "Profile",
-                modifier = Modifier
-                    .size(36.dp)
-                    .background(Color(0xFFE8F5E9), CircleShape)
-                    .padding(6.dp)
-            )
         }
 
         Spacer(Modifier.height(16.dp))
@@ -123,9 +109,9 @@ fun HomeScreen() {
 
         // Activity list
         val activities = listOf(
-            Triple("Air Conditioner — 2.1 kWh", "Today, 10:30 AM", "0.8 kg CO₂"),
-            Triple("Washing Machine — 1.4 kWh", "Today, 8:00 AM", "0.5 kg CO₂"),
-            Triple("EV Charging — 12 kWh", "Yesterday, 11 PM", "4.6 kg CO₂")
+            Triple("Air Conditioner", "Today, 10:30 AM", "0.8 kg CO₂"),
+            Triple("Washing Machine", "Today, 8:00 AM", "0.5 kg CO₂"),
+            Triple("EV Charging", "Yesterday, 11 PM", "4.6 kg CO₂")
         )
 
         activities.forEach { (name, time, co2) ->
