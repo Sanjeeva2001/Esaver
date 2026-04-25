@@ -3,7 +3,6 @@ package com.example.esaver
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -29,7 +28,7 @@ fun HomeScreen() {
         // Greeting row
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
@@ -44,14 +43,6 @@ fun HomeScreen() {
                     color = Color.Gray
                 )
             }
-            Icon(
-                Icons.Default.Person,
-                contentDescription = "Profile",
-                modifier = Modifier
-                    .size(36.dp)
-                    .background(Color(0xFFE8F5E9), CircleShape)
-                    .padding(6.dp)
-            )
         }
 
         Spacer(Modifier.height(16.dp))
