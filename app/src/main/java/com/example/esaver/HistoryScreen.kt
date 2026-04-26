@@ -87,6 +87,17 @@ fun HistoryScreen() {
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
+        Text(
+            text = "Energy History",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = "Tap an entry to view, edit or delete",
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Gray
+        )
+
         OutlinedTextField(
             value = search,
             onValueChange = { search = it },
@@ -99,16 +110,6 @@ fun HistoryScreen() {
                 disabledContainerColor = Color.White)
         )
 
-        Text(
-            text = "Energy History",
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = "Tap an entry to view, edit or delete",
-            style = MaterialTheme.typography.bodySmall,
-            color = Color.Gray
-        )
         Spacer(modifier = Modifier.height(12.dp))
 
         Row(
