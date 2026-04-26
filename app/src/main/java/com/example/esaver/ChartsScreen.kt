@@ -1,3 +1,8 @@
+// Author: madhumithachalla
+// ChartsScreen - Usage & Analytics dashboard
+// Displays daily energy bar chart, CO2 donut chart, and weekly summary
+// Part of ESaver - SDG 7 Carbon Footprint Tracker
+
 package com.example.esaver
 
 import androidx.compose.foundation.Canvas
