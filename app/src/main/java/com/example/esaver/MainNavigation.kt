@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.compose.*
-import com.example.energysaver.ForgotPasswordComposable
-import com.example.energysaver.LogInCompose
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,14 +86,14 @@ fun MainNavigation() {
                 composable(Destination.LOG.route) { LogScreen() }
                 composable(Destination.HISTORY.route) { HistoryScreen() }
                 composable(Destination.LOGIN.route) {
-                    LogInCompose(
+                    LoginScreen(
                         onLoginClick = {
                             navController.navigate(Destination.HOME.route)
                         },
                         onForgotPasswordClick = {
                             navController.navigate("forgot")
                         },
-                        onSignUpClick = {
+                        onRegisterClick = {
                             navController.navigate("register")
                         }
                     )
