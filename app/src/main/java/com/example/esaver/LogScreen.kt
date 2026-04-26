@@ -42,8 +42,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 
 private val PrimaryGreen = Color(0xFF2E7D32)
@@ -90,7 +93,16 @@ fun LogScreen() {
         Spacer(Modifier.height(12.dp))
 
         // 2. Category
-        Text("Category", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+        Text(
+            text = buildAnnotatedString {
+                append("Category ")
+                withStyle(SpanStyle(color = Color.Red)) {
+                    append("*")
+                }
+            },
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold
+        )
         Spacer(Modifier.height(8.dp))
         FlowRow(
             horizontalArrangement = spacedBy(8.dp),
@@ -122,7 +134,16 @@ fun LogScreen() {
         Spacer(Modifier.height(12.dp))
 
         // 3. Device / Appliance
-        Text("Device / Appliance", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+        Text(
+            text = buildAnnotatedString {
+                append("Device / Appliance ")
+                withStyle(SpanStyle(color = Color.Red)) {
+                    append("*")
+                }
+            },
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold
+        )
         Spacer(Modifier.height(8.dp))
         ExposedDropdownMenuBox(
             expanded = expanded,
@@ -198,7 +219,12 @@ fun LogScreen() {
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    "Energy Used (kWh)",
+                    text = buildAnnotatedString {
+                        append("Energy Used (kWh) ")
+                        withStyle(SpanStyle(color = Color.Red)) {
+                            append("*")
+                        }
+                    },
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -257,13 +283,6 @@ fun LogScreen() {
                 unfocusedContainerColor = Color.White
             )
         )
-        Spacer(Modifier.height(4.dp))
-        Text(
-            "From your IoT sensor dataset (Smart_Appliance_Usage_hours)",
-            style = MaterialTheme.typography.bodySmall,
-            color = Color.Gray
-        )
-
         Spacer(Modifier.height(12.dp))
 
         // 7. Date + Time
@@ -272,7 +291,16 @@ fun LogScreen() {
             horizontalArrangement = spacedBy(8.dp)
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text("Date", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+                Text(
+                    text = buildAnnotatedString {
+                        append("Date ")
+                        withStyle(SpanStyle(color = Color.Red)) {
+                            append("*")
+                        }
+                    },
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
                 Spacer(Modifier.height(4.dp))
                 OutlinedTextField(
                     value = "24/04/2026",

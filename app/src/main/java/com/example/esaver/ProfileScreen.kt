@@ -38,7 +38,7 @@ fun ProfileScreen() {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        // ── User Info Card ─────────────────────────────────────────────
+        // User Info Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -91,7 +91,7 @@ fun ProfileScreen() {
             }
         }
 
-        // ── Notifications Card ─────────────────────────────────────────
+        //  Notifications Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -124,7 +124,7 @@ fun ProfileScreen() {
             }
         }
 
-        // ── Weekly CO2 Goal Card ───────────────────────────────────────
+        // Weekly CO2 Goal Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -168,7 +168,7 @@ fun ProfileScreen() {
             }
         }
 
-        // ── Preferences Card ──────────────────────────────────────────
+        //  Preferences Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -199,7 +199,7 @@ fun ProfileScreen() {
             }
         }
 
-        // ── Sign Out Button ────────────────────────────────────────────
+        //  Sign Out Button
         OutlinedButton(
             onClick = { /* TODO: sign out */ },
             modifier = Modifier
@@ -216,7 +216,7 @@ fun ProfileScreen() {
     }
 }
 
-// ── Reusable sub-composables ──────────────────────────────────────────────────
+// Reusable sub-composables
 
 @Composable
 private fun ProfileStatChip(

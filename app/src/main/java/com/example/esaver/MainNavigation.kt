@@ -78,10 +78,15 @@ fun MainNavigation() {
             }
             NavHost(
                 navController = navController,
-                startDestination = Destination.HOME.route,
+                startDestination = "home",
                 modifier = Modifier.weight(1f)
             ) {
-                composable(Destination.HOME.route) { HomeScreen() }
+                composable("home") {
+                    HomeScreen(onChatClick = { navController.navigate("community") })
+                }
+                composable("community") {
+                    CommunityChatScreen(onBack = { navController.popBackStack() })
+                }
                 composable(Destination.CHARTS.route) { ChartsScreen() }
                 composable(Destination.LOG.route) { LogScreen() }
                 composable(Destination.HISTORY.route) { HistoryScreen() }
