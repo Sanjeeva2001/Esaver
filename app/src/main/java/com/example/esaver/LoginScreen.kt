@@ -36,6 +36,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.IconButton
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 
 
 class LogIn {
@@ -55,6 +61,7 @@ fun LogInCompose(onLoginClick: () -> Unit,
 
         var email = remember { mutableStateOf("") }
         var password = remember { mutableStateOf("") }
+        var passwordVisible by remember { mutableStateOf(false) }
 
         Box(modifier = Modifier.fillMaxSize().padding(24.dp)){
 
@@ -84,6 +91,16 @@ fun LogInCompose(onLoginClick: () -> Unit,
                     onValueChange = { password.value = it },
                     label = { Text("Password") },
                     modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val image = if (passwordVisible)
+                            Icons.Default.Visibility
+                        else Icons.Default.VisibilityOff
+
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(imageVector = image, contentDescription = null)
+                        }
+                    },
                     colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = Color.White,
                         unfocusedContainerColor = Color.White

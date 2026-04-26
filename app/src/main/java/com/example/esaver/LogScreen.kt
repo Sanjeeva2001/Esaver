@@ -31,6 +31,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -135,11 +136,16 @@ fun LogScreen() {
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White
+                )
             )
             ExposedDropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.background(Color.White)
             ) {
                 devices.forEach { device ->
                     DropdownMenuItem(
@@ -147,7 +153,8 @@ fun LogScreen() {
                         onClick = {
                             selectedDevice = device
                             expanded = false
-                        }
+                        },
+                        colors = MenuDefaults.itemColors(textColor = Color.Black)
                     )
                 }
             }
@@ -201,7 +208,11 @@ fun LogScreen() {
                     onValueChange = { energyUsed = it },
                     modifier = Modifier.fillMaxWidth(),
                     placeholder = { Text("e.g. 1.5") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White
+                    )
                 )
             }
             Column(modifier = Modifier.weight(1f)) {
@@ -240,7 +251,11 @@ fun LogScreen() {
             onValueChange = { smartUsage = it },
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("e.g. 3.5") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
+            )
         )
         Spacer(Modifier.height(4.dp))
         Text(
@@ -264,7 +279,11 @@ fun LogScreen() {
                     onValueChange = {},
                     readOnly = true,
                     modifier = Modifier.fillMaxWidth(),
-                    trailingIcon = { Icon(Icons.Default.DateRange, contentDescription = "Date") }
+                    trailingIcon = { Icon(Icons.Default.DateRange, contentDescription = "Date") },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White
+                    )
                 )
             }
             Column(modifier = Modifier.weight(1f)) {
@@ -275,7 +294,11 @@ fun LogScreen() {
                     onValueChange = {},
                     readOnly = true,
                     modifier = Modifier.fillMaxWidth(),
-                    trailingIcon = { Icon(Icons.Default.Schedule, contentDescription = "Time") }
+                    trailingIcon = { Icon(Icons.Default.Schedule, contentDescription = "Time") },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White
+                    )
                 )
             }
         }
@@ -290,7 +313,11 @@ fun LogScreen() {
             onValueChange = { notes = it },
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("Any extra details...") },
-            minLines = 3
+            minLines = 3,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
+            )
         )
 
         // 9. Save Button

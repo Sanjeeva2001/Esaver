@@ -94,7 +94,7 @@ fun ChartsScreen() {
             }
         }
 
-        // ── Daily Energy Bar Chart ──────────────────────────────────────
+        // Daily Energy Bar Chart
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -153,7 +153,7 @@ fun ChartsScreen() {
 
         Spacer(Modifier.height(16.dp))
 
-        // ── CO2 by Category Donut Chart ─────────────────────────────────
+        // CO2 by Category Donut Chart
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -239,7 +239,7 @@ fun ChartsScreen() {
 
         Spacer(Modifier.height(16.dp))
 
-        // ── Weekly Summary ──────────────────────────────────────────────
+        //Weekly Summary
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
