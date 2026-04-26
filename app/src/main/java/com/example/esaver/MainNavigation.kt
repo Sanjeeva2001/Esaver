@@ -108,7 +108,9 @@ fun MainNavigation() {
                         onBack = { navController.popBackStack() }
                     )
                 }
-                composable("register") { RegisterScreen() }
+                composable("register") {
+                    RegisterScreen(onBack = { navController.popBackStack() })
+                }
                 composable(Destination.PROFILE.route) { ProfileScreen() }
             }
         }

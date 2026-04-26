@@ -1,5 +1,6 @@
 package com.example.esaver
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,8 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
@@ -23,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,69 +44,78 @@ fun ForgotPasswordComposable(onBack: () -> Unit) {
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFE8F5E9)){
 
-        Column(modifier = Modifier.fillMaxSize().padding(24.dp),
+        Column(modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
+            verticalArrangement = Arrangement.Top) {
 
-            Row(modifier = Modifier.fillMaxWidth()) {
-                ElevatedButton(
-                    onClick = onBack,
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White)
+                    .padding(horizontal = 8.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.Black
+                    )
+                }
+                Text(
+                    text = "Reset Password",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Column(modifier = Modifier.fillMaxWidth().padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+
+                OutlinedTextField(value = input,
+                    onValueChange = {input = it},
+                    label = {
+                        Text(
+                            if (option == "Email") "Enter email"
+                            else "Enter phone number"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White
+                    )
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = option == "Email",
+                        onClick = { option = "Email" })
+                    Text(text = "Email")
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = option == "SMS",
+                        onClick = { option = "SMS" })
+                    Text(text = "SMS")
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+
+                ElevatedButton(onClick = {},
+                    modifier = Modifier.fillMaxWidth().height(55.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = green
+                        containerColor = green,
+                        contentColor = Color.White
+
                     )
                 ) {
-                    Text(text = "Back")
+                    Text(text = "Send code",
+                        fontSize = 16.sp)
                 }
             }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            OutlinedTextField(value = input,
-                onValueChange = {input = it},
-                label = {
-                    Text(
-                        if (option == "Email") "Enter email"
-                        else "Enter phone number"
-                    )
-                },
-                modifier = Modifier.fillMaxWidth(),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White
-                )
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(selected = option == "Email",
-                    onClick = { option = "Email" })
-                Text(text = "Email")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(selected = option == "SMS",
-                    onClick = { option = "SMS" })
-                Text(text = "SMS")
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-
-            ElevatedButton(onClick = {},
-                modifier = Modifier.fillMaxWidth().height(55.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = green,
-                    contentColor = Color.White
-
-                )
-            ) {
-                Text(text = "Send code",
-                    fontSize = 16.sp)
-            }
-
-
-
-
         }
-
     }
 }
 

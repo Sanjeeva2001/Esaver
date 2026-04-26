@@ -11,8 +11,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class Destination(val route: String, val icon: ImageVector, val label: String) {
     HOME("home", Icons.Default.Home, "Home"),
-    CHARTS("charts", Icons.Default.BarChart, "Charts"),
-    LOG("log", Icons.Default.Add, "Logs"),
+    CHARTS("charts", Icons.Default.BarChart, "Usage"),
+    LOG("log", Icons.Default.Add, "Record"),
     HISTORY("history", Icons.AutoMirrored.Filled.List, "History"),
     LOGIN("login", Icons.Default.Lock, "Login"),
     PROFILE("profile", Icons.Default.Person, "Profile")
