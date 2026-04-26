@@ -22,26 +22,32 @@ fun MainNavigation() {
     val currentRoute = backStackEntry?.destination?.route
     var railOpen by remember { mutableStateOf(true) }
 
+    // Navigation Rail only for authenticated screens
+    val authRoutes = listOf("login", "register", "forgot")
+    val showRail = currentRoute !in authRoutes && currentRoute != null
+
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "ESaver",
-                        fontWeight = FontWeight.Bold
+            if (showRail) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "ESaver",
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { railOpen = !railOpen }) {
+                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color(0xFF2E7D32),
+                        titleContentColor = Color.White,
+                        navigationIconContentColor = Color.White
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { railOpen = !railOpen }) {
-                        Icon(Icons.Default.Menu, contentDescription = "Menu")
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF2E7D32),
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
                 )
-            )
+            }
         }
     ) { padding ->
         Row(
@@ -49,7 +55,7 @@ fun MainNavigation() {
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            if (railOpen) {
+            if (showRail && railOpen) {
                 NavigationRail(
                     containerColor = Color(0xFF2E7D32)
                 ) {
@@ -78,22 +84,15 @@ fun MainNavigation() {
             }
             NavHost(
                 navController = navController,
-                startDestination = "home",
+                startDestination = "login",
                 modifier = Modifier.weight(1f)
             ) {
-                composable("home") {
-                    HomeScreen(onChatClick = { navController.navigate("community") })
-                }
-                composable("community") {
-                    CommunityChatScreen(onBack = { navController.popBackStack() })
-                }
-                composable(Destination.CHARTS.route) { ChartsScreen() }
-                composable(Destination.LOG.route) { LogScreen() }
-                composable(Destination.HISTORY.route) { HistoryScreen() }
-                composable(Destination.LOGIN.route) {
+                composable("login") {
                     LoginScreen(
                         onLoginClick = {
-                            navController.navigate(Destination.HOME.route)
+                            navController.navigate("home") {
+                                popUpTo("login") { inclusive = true }
+                            }
                         },
                         onForgotPasswordClick = {
                             navController.navigate("forgot")
@@ -103,14 +102,21 @@ fun MainNavigation() {
                         }
                     )
                 }
-                composable("forgot") {
-                    ForgotPasswordComposable(
-                        onBack = { navController.popBackStack() }
-                    )
-                }
                 composable("register") {
                     RegisterScreen(onBack = { navController.popBackStack() })
                 }
+                composable("forgot") {
+                    ForgotPasswordComposable(onBack = { navController.popBackStack() })
+                }
+                composable("home") {
+                    HomeScreen(onChatClick = { navController.navigate("community") })
+                }
+                composable("community") {
+                    CommunityChatScreen(onBack = { navController.popBackStack() })
+                }
+                composable(Destination.CHARTS.route) { ChartsScreen() }
+                composable(Destination.LOG.route) { LogScreen() }
+                composable(Destination.HISTORY.route) { HistoryScreen() }
                 composable(Destination.PROFILE.route) { ProfileScreen() }
             }
         }
