@@ -255,7 +255,7 @@ fun LogScreen() {
                     modifier = Modifier.fillMaxWidth(),
                     placeholder = { Text("—") },
                     colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedContainerColor = PaleGreen,
+                        unfocusedContainerColor = Color.White,
                         focusedContainerColor = PaleGreen,
                         disabledContainerColor = PaleGreen
                     )

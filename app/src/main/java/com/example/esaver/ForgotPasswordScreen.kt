@@ -111,7 +111,7 @@ fun ForgotPasswordComposable(onBack: () -> Unit) {
 
                     )
                 ) {
-                    Text(text = "Send code",
+                    Text(text = "Send link",
                         fontSize = 16.sp)
                 }
             }
