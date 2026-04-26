@@ -12,6 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -23,6 +27,8 @@ fun RegisterScreen() {
     var city by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+    var confirmPasswordVisible by remember { mutableStateOf(false) }
     var termsChecked by remember { mutableStateOf(false) }
     var dataConsentChecked by remember { mutableStateOf(false) }
     var tipsChecked by remember { mutableStateOf(false) }
@@ -134,7 +140,16 @@ fun RegisterScreen() {
                     onValueChange = { password = it },
                     modifier = Modifier.fillMaxWidth(),
                     placeholder = { Text("Min. 8 characters") },
-                    visualTransformation = PasswordVisualTransformation()
+                    visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val image = if (passwordVisible)
+                            Icons.Default.Visibility
+                        else Icons.Default.VisibilityOff
+
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(imageVector = image, contentDescription = null)
+                        }
+                    }
                 )
 
                 Spacer(Modifier.height(12.dp))
@@ -145,7 +160,16 @@ fun RegisterScreen() {
                     onValueChange = { confirmPassword = it },
                     modifier = Modifier.fillMaxWidth(),
                     placeholder = { Text("Repeat password") },
-                    visualTransformation = PasswordVisualTransformation()
+                    visualTransformation = if (confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val image = if (confirmPasswordVisible)
+                            Icons.Default.Visibility
+                        else Icons.Default.VisibilityOff
+
+                        IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
+                            Icon(imageVector = image, contentDescription = null)
+                        }
+                    }
                 )
             }
         }

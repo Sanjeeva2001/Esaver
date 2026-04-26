@@ -1,6 +1,5 @@
-package com.example.energysaver
+package com.example.esaver
 
-import android.view.Surface
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,11 +20,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,7 +30,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ForgotPasswordComposable(onBack: () -> Unit) {
 
-    val Green = Color(0xFF1B5E20)
+    val green = Color(0xFF1B5E20)
 
     var option by remember { mutableStateOf("Email") }
     var input by remember { mutableStateOf("") }
@@ -44,6 +41,20 @@ fun ForgotPasswordComposable(onBack: () -> Unit) {
         Column(modifier = Modifier.fillMaxSize().padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                ElevatedButton(
+                    onClick = onBack,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                        contentColor = green
+                    )
+                ) {
+                    Text(text = "Back")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             OutlinedTextField(value = input,
                 onValueChange = {input = it},
@@ -63,12 +74,12 @@ fun ForgotPasswordComposable(onBack: () -> Unit) {
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(selected = option == "Email",
-                    onClick = {option == "Email"})
+                    onClick = { option = "Email" })
                 Text(text = "Email")
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(selected = option == "SMS",
-                    onClick = {option == "SMS"})
+                    onClick = { option = "SMS" })
                 Text(text = "SMS")
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -76,7 +87,7 @@ fun ForgotPasswordComposable(onBack: () -> Unit) {
             ElevatedButton(onClick = {},
                 modifier = Modifier.fillMaxWidth().height(55.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Green,
+                    containerColor = green,
                     contentColor = Color.White
 
                 )
@@ -84,6 +95,7 @@ fun ForgotPasswordComposable(onBack: () -> Unit) {
                 Text(text = "Send code",
                     fontSize = 16.sp)
             }
+
 
 
 
