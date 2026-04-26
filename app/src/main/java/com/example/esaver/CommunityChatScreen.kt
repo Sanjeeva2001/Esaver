@@ -102,7 +102,7 @@ fun CommunityChatScreen(onBack: () -> Unit = {}) {
                         shape = RoundedCornerShape(24.dp),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedContainerColor = Color(0xFFF1F8E9),
-                            unfocusedContainerColor = Color(0xFFF1F8E9)
+                            unfocusedContainerColor = Color.White
                         )
                     )
 
